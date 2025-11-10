@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 40% 5%;
+    --foreground: 180 100% 95%;
+
+    --card: 220 30% 8%;
+    --card-foreground: 180 100% 95%;
+
+    --popover: 220 35% 6%;
+    --popover-foreground: 180 100% 95%;
+
+    --primary: 180 85% 55%;
+    --primary-foreground: 220 40% 5%;
+
+    --secondary: 190 75% 45%;
+    --secondary-foreground: 220 40% 5%;
+
+    --muted: 220 25% 15%;
+    --muted-foreground: 180 20% 65%;
+
+    --accent: 170 80% 50%;
+    --accent-foreground: 220 40% 5%;
+
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 180 100% 95%;
+
+    --border: 220 25% 18%;
+    --input: 220 25% 18%;
+    --ring: 180 85% 55%;
+
+    --radius: 0.75rem;
+
+    /* Glassmorphism tokens */
+    --glass-bg: 220 30% 12%;
+    --glass-border: 180 50% 40%;
+    --glass-shadow: 180 85% 55%;
+
+    /* Glow effects */
+    --glow-primary: 180 85% 55%;
+    --glow-secondary: 190 75% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  /* Glassmorphism utility */
+  .glass-card {
+    background: hsla(var(--glass-bg), 0.4);
+    backdrop-filter: blur(12px);
+    border: 1px solid hsla(var(--glass-border), 0.2);
+    box-shadow: 0 8px 32px 0 hsla(var(--glass-shadow), 0.15);
+    border-radius: var(--radius);
+  }
+
+  .glass-card-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .glass-card-hover:hover {
+    border-color: hsla(var(--glass-border), 0.4);
+    box-shadow: 0 12px 48px 0 hsla(var(--glass-shadow), 0.25);
+  }
+
+  /* Glow effects */
+  .glow-text {
+    text-shadow: 0 0 20px hsla(var(--glow-primary), 0.5);
+  }
+
+  .glow-border {
+    box-shadow: 0 0 20px hsla(var(--glow-primary), 0.3), inset 0 0 20px hsla(var(--glow-primary), 0.1);
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted));
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary));
+  }
+}
+
+/* Animation utilities */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
