@@ -4,6 +4,9 @@ import path from "path";
 const nextConfig: NextConfig = {
   // Silence monorepo root inference warning
   outputFileTracingRoot: path.join(__dirname, ".."),
+  experimental: {
+    serverComponentsExternalPackages: ["@fhevm/solidity"],
+  },
   headers() {
     // Required by FHEVM: apply to ALL routes, not only '/'
     // so that scripts/wasm/static assets are also served with COOP/COEP
