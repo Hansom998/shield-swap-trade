@@ -105,14 +105,14 @@ const config: HardhatUserConfig = {
     tests: "./test",
   },
   solidity: {
-    version: "0.8.27",
+    version: "0.8.24",
     settings: {
       metadata: {
         bytecodeHash: "none",
       },
       optimizer: {
         enabled: true,
-        runs: 800,
+        runs: 1000,
       },
       evmVersion: "cancun",
     },
