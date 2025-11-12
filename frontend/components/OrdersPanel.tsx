@@ -1,7 +1,7 @@
 "use client";
 
 import { Shield, Lock } from "lucide-react";
-import { useOperationLog } from "@/hooks/useOperationLogs";
+import { useOperationLog } from "@/hooks/useOperationLog";
 
 interface Order {
   id: string;
