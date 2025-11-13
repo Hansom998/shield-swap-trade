@@ -24,6 +24,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "daisyui": "^4.12.14",
+    "ethers": "^6.15.0",
     "idb": "^8.0.3",
     "lucide-react": "^0.474.0",
     "next": "^15.4.2",
