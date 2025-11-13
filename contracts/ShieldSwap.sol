@@ -48,7 +48,7 @@ contract ShieldSwap is SepoliaConfig {
     /// @notice Get the caller's latest private order handles.
     /// @return fromAmount Encrypted euint32 handle of the from amount
     /// @return toAmount Encrypted euint32 handle of the to amount
-    function getMyOrder() public view returns (euint32 fromAmount, euint32 toAmount) {
+    function getMyOrder() external view returns (euint32 fromAmount, euint32 toAmount) {
         Order storage o = _orders[msg.sender];
         return (o.fromAmount, o.toAmount);
     }
