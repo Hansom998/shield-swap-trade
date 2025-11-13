@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { ArrowDownUp, ChevronDown, Shield, Loader2 } from "lucide-react";
 import { useFhevm } from "@/fhevm/useFhevm";
 import { useInMemoryStorage } from "@/hooks/useInMemoryStorage";
@@ -58,7 +58,7 @@ export function SwapCard() {
     }
   }, [fromAmount, fromToken, toToken]);
 
-  const handleSwapTokens = () => {
+  const handleSwapTokens = useCallback(() => {
     const tempToken = fromToken;
     setFromToken(toToken);
     setToToken(tempToken);
@@ -66,9 +66,9 @@ export function SwapCard() {
     const tempAmount = fromAmount;
     setFromAmount(toAmount);
     setToAmount(tempAmount);
-  };
+  }, [fromToken, toToken, fromAmount, toAmount]);
 
-  const handlePlaceOrder = () => {
+  const handlePlaceOrder = useCallback(() => {
     const from = parseInt(fromAmount || "0", 10);
     const to = parseInt(toAmount || "0", 10);
     if (!Number.isFinite(from) || !Number.isFinite(to)) return;
@@ -79,7 +79,7 @@ export function SwapCard() {
       details: `from=${from}, to=${to}`,
     });
     shieldSwap.setOrder(from, to);
-  };
+  }, [fromAmount, toAmount, addLog, shieldSwap]);
 
   // Mirror shieldSwap messages into operation log
   useEffect(() => {
