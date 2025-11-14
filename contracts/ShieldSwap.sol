@@ -17,6 +17,7 @@ contract ShieldSwap is SepoliaConfig {
     mapping(address => Order) private _orders;
 
     event OrderCreated(address indexed user, uint256 timestamp);
+    event OrderRetrieved(address indexed user, uint256 timestamp);
 
     /// @notice Set the caller's latest private swap order.
     /// @param fromAmount External encrypted euint32 (amount the user pays)
@@ -48,8 +49,9 @@ contract ShieldSwap is SepoliaConfig {
     /// @notice Get the caller's latest private order handles.
     /// @return fromAmount Encrypted euint32 handle of the from amount
     /// @return toAmount Encrypted euint32 handle of the to amount
-    function getMyOrder() external view returns (euint32 fromAmount, euint32 toAmount) {
+    function getMyOrder() external returns (euint32 fromAmount, euint32 toAmount) {
         Order storage o = _orders[msg.sender];
+        emit OrderRetrieved(msg.sender, block.timestamp);
         return (o.fromAmount, o.toAmount);
     }
 
