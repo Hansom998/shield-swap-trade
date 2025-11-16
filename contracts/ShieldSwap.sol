@@ -28,6 +28,8 @@ contract ShieldSwap is SepoliaConfig {
         externalEuint32 toAmount,
         bytes calldata inputProof
     ) external {
+        require(inputProof.length > 0, "Invalid proof");
+        
         euint32 encFrom = FHE.fromExternal(fromAmount, inputProof);
         euint32 encTo = FHE.fromExternal(toAmount, inputProof);
 
