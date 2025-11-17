@@ -62,4 +62,10 @@ contract ShieldSwap is SepoliaConfig {
     function getMyOrderTimestamp() external view returns (uint256) {
         return _orders[msg.sender].timestamp;
     }
+
+    /// @notice Check if the caller has an active order.
+    /// @return hasOrder True if the caller has placed an order
+    function hasOrder() external view returns (bool) {
+        return _orders[msg.sender].timestamp > 0;
+    }
 }
