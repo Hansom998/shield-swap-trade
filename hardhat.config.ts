@@ -60,6 +60,7 @@ const config: HardhatUserConfig = {
     currency: "USD",
     enabled: process.env.REPORT_GAS ? true : false,
     excludeContracts: [],
+    showMethodSig: true,
   },
   networks: {
     hardhat: {
