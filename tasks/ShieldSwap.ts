@@ -171,3 +171,37 @@ task("task:set-order", "Creates an encrypted swap order")
       `ShieldSwap setOrder(from=${fromAmount}, to=${toAmount}) succeeded!`
     );
   });
+
+/**
+ * Example:
+ *   - npx hardhat --network localhost task:check-order
+ *   - npx hardhat --network sepolia task:check-order
+ */
+task("task:check-order", "Check if the caller has an active order")
+  .addOptionalParam("address", "Optionally specify the ShieldSwap contract address")
+  .setAction(async function (taskArguments: TaskArguments, hre) {
+    const { ethers, deployments } = hre;
+
+    const ShieldSwapDeployment = taskArguments.address
+      ? { address: taskArguments.address }
+      : await deployments.get("ShieldSwap");
+    console.log(`ShieldSwap: ${ShieldSwapDeployment.address}`);
+
+    const signers = await ethers.getSigners();
+
+    const shieldSwapContract = await ethers.getContractAt(
+      "ShieldSwap",
+      ShieldSwapDeployment.address
+    );
+
+    const hasOrder = await shieldSwapContract.hasOrder();
+    const timestamp = await shieldSwapContract.getMyOrderTimestamp();
+
+    console.log(`Address: ${signers[0].address}`);
+    console.log(`Has active order: ${hasOrder}`);
+    
+    if (hasOrder && timestamp > 0) {
+      const orderDate = new Date(Number(timestamp) * 1000);
+      console.log(`Order created at: ${orderDate.toISOString()}`);
+    }
+  });
