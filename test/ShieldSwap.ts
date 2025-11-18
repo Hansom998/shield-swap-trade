@@ -175,4 +175,56 @@ describe("ShieldSwap", function () {
     );
     expect(bobClearFrom).to.eq(500);
   });
+
+  it("should check if user has an active order", async function () {
+    // Initially, Alice should not have an order
+    expect(await shieldSwapContract.connect(signers.alice).hasOrder()).to.be.false;
+
+    // Create an order for Alice
+    const fromAmount = 200;
+    const toAmount = 5000;
+    const encryptedFromAmount = await fhevm.userEncryptEuint(
+      FhevmType.euint32,
+      fromAmount,
+      shieldSwapContractAddress,
+      signers.alice
+    );
+    const encryptedToAmount = await fhevm.userEncryptEuint(
+      FhevmType.euint32,
+      toAmount,
+      shieldSwapContractAddress,
+      signers.alice
+    );
+
+    await shieldSwapContract
+      .connect(signers.alice)
+      .setOrder(encryptedFromAmount.handles[0], encryptedToAmount.handles[0], encryptedFromAmount.inputProof);
+
+    // Now Alice should have an order
+    expect(await shieldSwapContract.connect(signers.alice).hasOrder()).to.be.true;
+  });
+
+  it("should revert with invalid proof", async function () {
+    const fromAmount = 100;
+    const toAmount = 2500;
+    const encryptedFromAmount = await fhevm.userEncryptEuint(
+      FhevmType.euint32,
+      fromAmount,
+      shieldSwapContractAddress,
+      signers.alice
+    );
+    const encryptedToAmount = await fhevm.userEncryptEuint(
+      FhevmType.euint32,
+      toAmount,
+      shieldSwapContractAddress,
+      signers.alice
+    );
+
+    // Try to set order with empty proof
+    await expect(
+      shieldSwapContract
+        .connect(signers.alice)
+        .setOrder(encryptedFromAmount.handles[0], encryptedToAmount.handles[0], "0x")
+    ).to.be.revertedWith("Invalid proof");
+  });
 });
