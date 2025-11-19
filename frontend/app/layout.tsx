@@ -5,8 +5,10 @@ import { ConnectWalletTopRight } from "@/components/ConnectWalletTopRight";
 import { Shield } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Cloak Exchange - Shield Swap Trade",
-  description: "Private encrypted swap trading with FHEVM",
+  title: "Shield Swap - Private Encrypted Trading",
+  description: "Trade with complete privacy using fully homomorphic encryption. Protected against MEV attacks and front-running.",
+  keywords: ["DeFi", "Privacy", "Encryption", "FHEVM", "MEV Protection", "Private Trading"],
+  authors: [{ name: "Shield Swap Team" }],
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
@@ -31,8 +33,8 @@ export default async function RootLayout({
                     <Shield className="h-8 w-8 text-primary animate-pulse-glow" />
                   </div>
                   <div>
-                    <h1 className="text-xl font-bold glow-text">Cloak Exchange</h1>
-                    <p className="text-xs text-muted-foreground">Trade Behind the Shield.</p>
+                    <h1 className="text-xl font-bold glow-text">Shield Swap</h1>
+                    <p className="text-xs text-muted-foreground">Private. Encrypted. Protected.</p>
                   </div>
                 </div>
                 <ConnectWalletTopRight />
