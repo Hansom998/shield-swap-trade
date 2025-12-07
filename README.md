@@ -8,7 +8,7 @@ A privacy-preserving decentralized exchange built with Fully Homomorphic Encrypt
 
 ## Live Demo
 
-Try it now: [https://shield-swap-trade.vercel.app/](https://shield-swap-trade.vercel.app/)
+Try it now: [https://shield-swap-trade-aoftr.vercel.app/](https://shield-swap-trade-aoftr.vercel.app/)
 
 ## Features
 
